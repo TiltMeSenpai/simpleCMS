@@ -15,7 +15,7 @@
 <h3>Templating Basics</h3>
 <p><h4>Statements</h4>
 A statement is surrounded by {{!}}. Any vaild python expression will work in these brackets. For example, the statement {{![i**2 for i in range(0, 4)]}} generates {{[i**2 for i in range(0, 4)]}}, as you might expect. While this is a simple example, this could easily be used to do more complicated things, such as display load times or interact with databases. Because these templates are compiled into actual python code, and not just interpreted as a subset of python, the limits are nearly
-endless. As an actually useful application, you loaded this page at {{datetime.datetime.today().strfdate("%x, %X")}}<br/>
+endless. As an actually useful application, you loaded this page at {{datetime.datetime.today().strftime("%x, %X")}}<br/>
 <h4>Directives</h4>
 A directive is surrounded in {%!%}. While statements must return a value (Would work in a print() statement), directives provide most of the constructs that statements can't provide. These include things like if blocks, for loops, imports, or try-except-finally blocks. This means that, at least in theory, you could define complex behaviors in a Tornado template.</p>
 <p>By no means is this a comprehensive, or even half decent, coverage of Tornado's capabilities. Tornado is also capable of serving websockets, along with being mostly modular meaning that for the most part, you can use as much or as little of the Tornado library as you want. If you want to really lean Tornado, look through the <a href="http://www.tornadoweb.org/en/stable/">documentation</a>. It's half decent, and provides a few examples. And if you want help, leave a comment or send me an
