@@ -9,10 +9,9 @@ class Entry(UIModule):
 
 class Snippet(UIModule):
     def render(self, path, **kwargs):
-        print(snippet.findall(str(Entry(self).render(path, **kwargs)))[:1][0])
         return self.render_string(
                 "snippet.html",
                 title=path.split('/')[-1][:-5].replace('_', ' '),
-                snippet=snippet.findall(str(Entry(self).render(path, **kwargs)))[:1][0],
+                snippet=snippet.findall(str(Entry(self).render(path, **kwargs)))[:1][0].decode(),
                 link='/'+path
                 )
