@@ -1,0 +1,10 @@
+{%autoescape None%}
+{% extends 'base.html' %}
+{%block title%}Archives{%end%}
+{%block content%}
+<div class="panel-group">
+    {%for page in pagelist%}
+        {% module Snippet(page) %} 
+    {%end%}
+</div>
+{%end%}
