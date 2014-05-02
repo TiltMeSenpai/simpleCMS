@@ -13,7 +13,7 @@ class Config():
     debug = True
     def __init__(self, **kwargs):
         p = argparse.ArgumentParser()
-        p.add_argument('-p', type=int, default=5000, dest='port')
+        p.add_argument('-p', type=int, default=8080, dest='port')
         args = p.parse_args()
         for arg in args.__dict__:
             setattr(self, arg, args.__dict__[arg])
