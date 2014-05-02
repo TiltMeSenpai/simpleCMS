@@ -12,6 +12,6 @@ class Snippet(UIModule):
         return self.render_string(
                 "snippet.html",
                 title=path.split('/')[-1][:-5].replace('_', ' '),
-                snippet="".join(snippet.findall(Entry(self).render(path, **kwargs))[:1]),
+                snippet="".join(snippet.findall(str(Entry(self).render(path, **kwargs)))[:1]),
                 link='/'+path
                 )
