@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-{{path.split('/')[-1][:-5]}}
+{{path.split('/')[-1][:-5].replace('_', ' ')}}
 {%end%}
 {% block content %}
 {% module Entry(path) %}

@@ -5,11 +5,18 @@ import inspect
 import modules
 from tornado.web import HTTPError
 from tornado.template import *
+import argparse
+
 class Config():
     port = 80
     title = "Yet Another CMS"
     debug = True
     def __init__(self, **kwargs):
+        p = argparse.ArgumentParser()
+        p.add_argument('-p', type=int, default=8080, dest='port')
+        args = p.parse_args()
+        for arg in args.__dict__:
+            setattr(self, arg, args.__dict__[arg])
         for arg in kwargs:
             setattr(self, arg, kwargs[arg])
 
@@ -47,7 +54,7 @@ class ArchiveHandler(BaseHandler):
 class EntryHandler(BaseHandler):
     def get(self, *post):
         print(post)
-        self.render('post.html', path=os.path.join('posts',*[i for i in post[:-1]])+'.html', pages=pages)
+        self.render('post.html', path=os.path.join('posts',*[i for i in post])+".html", pages=pages)
 
 def start(config = Config()):
     server = tornado.web.Application(
@@ -55,7 +62,7 @@ def start(config = Config()):
             (r"/?", HomeHandler),
             (r"/archive/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/?", ArchiveHandler),
-            (r"/posts/([0-9]{4})/([0-9]{1,2})/([a-z\-]*)(.html?)?", EntryHandler)
+            (r"/posts/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler)
         ],
         title= config.title,
         template_path= os.path.join(os.path.dirname(__file__), "templates"),
