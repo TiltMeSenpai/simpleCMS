@@ -14,6 +14,7 @@ class Config():
     def __init__(self, **kwargs):
         p = argparse.ArgumentParser()
         p.add_argument('-p', type=int, default=8080, dest='port')
+        p.add_argument('-d', type=bool, default=False, dest='debug')
         args = p.parse_args()
         for arg in args.__dict__:
             setattr(self, arg, args.__dict__[arg])
@@ -62,7 +63,7 @@ def start(config = Config()):
             (r"/?", HomeHandler),
             (r"/archive/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/?", ArchiveHandler),
-            (r"/posts/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler)
+            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler)
         ],
         title= config.title,
         template_path= os.path.join(os.path.dirname(__file__), "templates"),
