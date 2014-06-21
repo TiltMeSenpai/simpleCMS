@@ -1,7 +1,7 @@
 from tornado.web import UIModule
 import re
 
-snippet = re.compile(r"^(?:\<h[1-9]\>.*?\</h[1-9]\>)?((?:(?:.|\n)+?</p>){0,2})")
+snippet = re.compile(r"\s?(?:\<h[1-9]\>.*?\</h[1-9]\>)?((?:(?:.|\n)+?</p>){0,2})")
 
 class Entry(UIModule):
     def render(self, path, **kwargs):
@@ -12,6 +12,6 @@ class Snippet(UIModule):
         return self.render_string(
                 "snippet.html",
                 title=path.split('/')[-1][:-5].replace('_', ' '),
-                snippet=snippet.findall(Entry(self).render(path, **kwargs).decode())[:1][0],
+                snippet=snippet.match(Entry(self).render(path, **kwargs).decode()).group(1),
                 link='/'+path[6:]
                 )
