@@ -26,7 +26,7 @@ pages = {}
 for i in next(os.walk('templates/posts'))[1]:
     pages.update({i:{}})
     for j in next(os.walk(os.path.join('templates/posts', i)))[1]:
-        pages[i].update({j:[i for i in next(os.walk(os.path.join('templates/posts',i ,j)))[2]]})
+        pages[i].update({j:[i for i in next(os.walk(os.path.join('templates/posts',i ,j)))[2] if i[0] != '.']})
 print(pages)
 
 class BaseHandler(tornado.web.RequestHandler):

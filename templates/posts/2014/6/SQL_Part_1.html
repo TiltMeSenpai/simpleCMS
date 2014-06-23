@@ -49,7 +49,7 @@ To demonstrate this, let's create a vulnerable webapplication.
     <p>
     Take the case of our Irish friend, Mr. O'Malley. In his case, the query would become:
     </p>
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-sql">
     SELECT name, number FROM phonebook WHERE name LIKE 'Mr. O'Malley';
     </pre>
     Wait a sec. That doesnt look right. Why's that coloring off?
@@ -65,11 +65,11 @@ To demonstrate this, let's create a vulnerable webapplication.
     doesnt_matter' OR number=12345678910 #
     </pre>
     Our query now becomes:
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-sql">
     SELECT name, number FROM phonebook WHERE name LIKE 'doesnt_matter' OR number=12345678910 #'
     </pre>
     To make this a little clearer, let's add parentheses.
-    <pre class="prettyprint">
+    <pre class="prettyprint lang-sql">
     SELECT name, number FROM phonebook WHERE (name LIKE 'doesnt_matter') OR (number=12345678910) #'
     </pre>
     </p>
