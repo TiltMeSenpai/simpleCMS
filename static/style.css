@@ -7,6 +7,9 @@ nav.navbar{
 body{
     background:#1a1a1a;
 }
+.inline{
+    display:inline;
+}
 #contact-card > img{
     display:block;
     width:90%;
