@@ -1,17 +1,21 @@
 from tornado.web import UIModule
 import re
+import os
+from markdown2 import markdown
 
-snippet = re.compile(r"((?:(?:.|\n)+?(?:</p>|</div>)){0,2})")
-stripHeaders = re.compile(r"(\<h[1-9]\>.*?\</h[1-9]\>)")
+snippet = re.compile(r"((?:(?:.|\n)+?(?:<\/p>|<\/div>)){0,2})")
+stripHeaders = re.compile(r"(<h[1-9]>(?:.|\n)*?<\/h[1-9]>)")
 class Entry(UIModule):
     def render(self, path, **kwargs):
-        return self.render_string(path, **kwargs)
+        return markdown(self.render_string(path, **kwargs), extras=[
+        "pyshell", "cuddled-lists", "fenced-code-blocks", "wiki-tables"
+        ]).replace("<table>", "<table class=\"table\">")
 
 class Snippet(UIModule):
     def render(self, path, **kwargs):
         return self.render_string(
                 "snippet.html",
-                title=path.split('/')[-1][:-5].replace('_', ' '),
-                snippet=stripHeaders.sub("",snippet.match(Entry(self).render(path, **kwargs).decode()).group(1)),
-                link='/'+path[6:]
+                title=os.path.splitext(path.split('/')[-1])[0].replace('_', ' '),
+                snippet=stripHeaders.sub("", snippet.match(Entry(self).render(path, **kwargs)).group(1)),
+                link=os.path.splitext(path)[0][5:]
                 )

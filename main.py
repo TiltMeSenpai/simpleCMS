@@ -6,6 +6,7 @@ import modules
 from tornado.web import HTTPError
 from tornado.template import *
 import argparse
+from markdown2 import markdown
 
 class Config():
     port = 80
@@ -55,7 +56,7 @@ class ArchiveHandler(BaseHandler):
 class EntryHandler(BaseHandler):
     def get(self, *post):
         print(post)
-        self.render('post.html', path=os.path.join('posts',*[i for i in post])+".html", pages=pages)
+        self.render('post.html', path=os.path.join('posts',*[i for i in post])+".md", pages=pages)
 
 def start(config = Config()):
     server = tornado.web.Application(
@@ -69,7 +70,8 @@ def start(config = Config()):
         template_path= os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
         debug=config.debug,
-        ui_modules=modules
+        ui_modules=modules,
+        compress_whitespace=False
         )
     server.listen(config.port)
     tornado.ioloop.IOLoop.instance().start()
