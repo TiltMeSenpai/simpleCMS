@@ -58,9 +58,11 @@ Inner SELECTS
 Compared to everything else, this is only a tiny note, but in most forms of SQL,
 inner SELECT statements (Also known as subselects), are valid. As a fairly useless
  example,
+
 ```SQL
 SELECT (SELECT (SELECT user, passwd FROM users))
 ```
+
 is perfectly valid, if useless syntax.
 
 
@@ -85,28 +87,36 @@ a realistic system, let's pretend that the passwords are unencrypted.
 Now to successfully utilize numeric SQL injection, we need to get down to a single
 character of a single record. For the record part, we have the LIMIT verb, with two
 parameters, in the form
+
 ```SQL
 SELECT * FROM table LIMIT <offset>,<count>
 ```
-This means that if we do <pre class="prettyprint inline">SELECT * FROM TABLE LIMIT
-0,1</pre>, it will return the very first record from the table (No offset, one
-record). Similarly, if we run <pre class="prettyprint inline">SELECT * FROM TABLE
-LIMIT 10,1</pre>, we will get back the 10th record (Offset 10, one record).
+
+This means that if we do <pre class="prettyprint inline">SELECT * FROM TABLE LIMIT 0,1</pre>
+, it will return the very first record from the table (No offset, one
+record). Similarly, if we run  
+<pre class="prettyprint inline">SELECT * FROM TABLE LIMIT 10,1</pre>, we will get
+back the 10th record (Offset 10, one record).
 
 
 To get from a single record to a single record, we can use the SUBSTRING function.
 At this point, this makes our injection payload
+
+
 ```SQL
 ASCII(SUBSTRING(<SELECT statement>, <offset>, 1))
 ```
+
 
 To test this payload, we can use test strings as a replacement for the SELECT
 statement. Placing the string "Test_String" as a placeholder for the SELECT statement,
 we create the injection string
 
+
 ```SQL
 ASCII(SUBSTRING("Test_String", 1, 1))
 ```
+
 
 From here, exploitation becomes a matter of writing this out in a script to assist
 in mapping out the website layout and exfiltrating database contents. Because this
