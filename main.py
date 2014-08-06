@@ -69,7 +69,7 @@ def start(config = Config()):
             (r"/archive/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler),
-            (r"google5f6e510132caa548.html", GoogleHandler)
+            (r"/google5f6e510132caa548.html", GoogleHandler)
         ],
         title= config.title,
         template_path= os.path.join(os.path.dirname(__file__), "templates"),
