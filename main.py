@@ -68,7 +68,7 @@ def start(config = Config()):
             (r"/?", HomeHandler),
             (r"/archive/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/?", ArchiveHandler),
-            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler)
+            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler),
             (r"google5f6e510132caa548.html", GoogleHandler)
         ],
         title= config.title,
