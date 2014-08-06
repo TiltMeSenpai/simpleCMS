@@ -58,18 +58,13 @@ class EntryHandler(BaseHandler):
         print(post)
         self.render('post.html', path=os.path.join('posts',*[i for i in post])+".md", pages=pages)
 
-class GoogleHandler(BaseHandler):
-    def get(self):
-        self.render('google5f6e510132caa548.html')
-
 def start(config = Config()):
     server = tornado.web.Application(
         [
             (r"/?", HomeHandler),
             (r"/archive/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/?", ArchiveHandler),
-            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler),
-            (r"/google5f6e510132caa548.html", GoogleHandler)
+            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler)
         ],
         title= config.title,
         template_path= os.path.join(os.path.dirname(__file__), "templates"),
