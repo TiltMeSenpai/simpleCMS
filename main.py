@@ -15,7 +15,7 @@ class Config():
     def __init__(self, **kwargs):
         p = argparse.ArgumentParser()
         p.add_argument('-p', type=int, default=8080, dest='port')
-        p.add_argument('-d', type=bool, default=False, dest='debug')
+        p.add_argument('-d', default=False, dest='debug', action='store_true')
         args = p.parse_args()
         for arg in args.__dict__:
             setattr(self, arg, args.__dict__[arg])
@@ -58,13 +58,18 @@ class EntryHandler(BaseHandler):
         print(post)
         self.render('post.html', path=os.path.join('posts',*[i for i in post])+".md", pages=pages)
 
+class ISTA301Handler(BaseHandler):
+    def get(self):
+        self.render('ista301posts.html', pages=pages)
+
 def start(config = Config()):
     server = tornado.web.Application(
         [
             (r"/?", HomeHandler),
             (r"/archive/?", ArchiveHandler),
             (r"/([0-9]{4})/([0-9]{1,2})/?", ArchiveHandler),
-            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler)
+            (r"/([0-9]{4})/([0-9]{1,2})/([^/]*?)(?:.html?)?", EntryHandler),
+            (r"/ista301/?", ISTA301Handler)
         ],
         title= config.title,
         template_path= os.path.join(os.path.dirname(__file__), "templates"),

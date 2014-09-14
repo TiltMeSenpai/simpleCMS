@@ -5,10 +5,11 @@ from markdown2 import markdown
 
 snippet = re.compile(r"((?:(?:.|\n)+?(?:<\/p>|<\/div>)){0,2})")
 stripHeaders = re.compile(r"(<h[1-9]>(?:.|\n)*?<\/h[1-9]>)")
+
 class Entry(UIModule):
     def render(self, path, **kwargs):
         return markdown(self.render_string(path, **kwargs), extras=[
-        "pyshell", "cuddled-lists", "fenced-code-blocks", "wiki-tables"
+        "footnotes", "pyshell", "cuddled-lists", "fenced-code-blocks", "wiki-tables"
         ]).replace("<table>", "<table class=\"table\">")
 
 class Snippet(UIModule):
