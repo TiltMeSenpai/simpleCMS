@@ -1,6 +1,6 @@
 ## On *Avant Garde*, Dadaism, and Algorithmic Art
 
-### An Algorithmic Album Cover[^album-instructions]
+### [An Algorithmic Album Cover](#instructions)
 ![Cerithiidae: than it's worth.](
     {{static_url('ista301/album.png')}} "An algorithmic album cover"
 )
@@ -38,14 +38,15 @@ question the purpose and definition of art in his time period.
 Footers:
 ------
 [1]: http://en.wikipedia.org/wiki/Avant-garde
-[^album-instructions]: This album cover was generated from the following instructions:
-    1. Go to Wikipedia. Click: [http://en.wikipedia.org/wiki/Special:Search?search=&go=Go](http://en.wikipedia.org/wiki/Special:Search?search=&go=Go)
-        - Click 'random article' from the navigation menu to the left.
-        - The first random wikipedia article you get is the name of your band.
-    2. Go to [http://www.quotationspage.com/](http://www.quotationspage.com/)
-        - Click 'random quotes' from the navigation menu to the left.
-        - The last four or five words of the very last quote of the page is the title of your first album.
-    3. Go to Flickr and click [http://www.flickr.com/explore/interesting/7days](http://www.flickr.com/explore/interesting/7days)
-        - Third picture, no matter what it is, will be your album cover.
-    4. Use Photoshop, GIMP, or similar to put it all together.
-    5. Post the final image to your blog.  Below your posted image, describe the kind of music you imagine your new band making.
+<div id="instructions">The above album cover was generated from the following instructions:</div>
+
+1. Go to Wikipedia. Click: [http://en.wikipedia.org/wiki/Special:Search?search=&go=Go](http://en.wikipedia.org/wiki/Special:Search?search=&go=Go)
+    - Click 'random article' from the navigation menu to the left.
+    - The first random wikipedia article you get is the name of your band.
+2. Go to [http://www.quotationspage.com/](http://www.quotationspage.com/)
+    - Click 'random quotes' from the navigation menu to the left.
+    - The last four or five words of the very last quote of the page is the title of your first album.
+3. Go to Flickr and click [http://www.flickr.com/explore/interesting/7days](http://www.flickr.com/explore/interesting/7days)
+    - Third picture, no matter what it is, will be your album cover.
+4. Use Photoshop, GIMP, or similar to put it all together.
+5. Post the final image to your blog.  Below your posted image, describe the kind of music you imagine your new band making.

@@ -3,7 +3,7 @@
 At some stage of a web application involving a SQL database, the query is broken down into a simple string. At this point, certain inputs can cause the SQL server (The reciving end) to confuse commands and values. This allows attackers to exfiltrate or manipulate data from your servers.
 
 
-To demonstrate this, let's create a vulnerable webapplication.
+To demonstrate this, let's create a vulnerable web application.
 
 
 <h2>Uber Secure Phonebook</h2>
@@ -20,7 +20,7 @@ To demonstrate this, let's create a vulnerable webapplication.
 
 
 <h3 class="panel-heading">Server:</h3>
-    Okay, so I'm not going to w:qrite up the whole server here. If you want the code, I'll make a gist and link it over here. However, these are the important parts of the program.
+    Okay, so I'm not going to write up the whole server here. If you want the code, I'll make a gist and link it over here. However, these are the important parts of the program.
     <div class="panel">
         <h4 class="panel-heading lang-sql">
             Adding an Entry:
