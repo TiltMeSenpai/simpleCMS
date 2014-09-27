@@ -1,4 +1,4 @@
+CommonMark==0.5.2
 Pygments==1.6
 fake-factory==0.4.2
-markdown2==2.3.0
 tornado==4.0.2
