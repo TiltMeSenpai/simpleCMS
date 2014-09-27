@@ -6,7 +6,6 @@ import modules
 from tornado.web import HTTPError
 from tornado.template import *
 import argparse
-from markdown2 import markdown
 
 class Config():
     port = 80
