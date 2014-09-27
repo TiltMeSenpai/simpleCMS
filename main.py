@@ -51,12 +51,12 @@ class ArchiveHandler(BaseHandler):
             for page in pages[time[0]][time[1]]:
                 pagelist.append(os.path.join('posts', time[0], time[1], page))
         print(pagelist)
-        self.render('archive.html', pagelist=pagelist, pages=pages)
+        self.render('archive.html', pagelist=pagelist, pages=pages, time=time)
 
 class EntryHandler(BaseHandler):
     def get(self, *post):
         print(post)
-        self.render('post.html', path=os.path.join('posts',*[i for i in post])+".md", pages=pages)
+        self.render('post.html', path=os.path.join('posts', *[i for i in post])+".md", pages=pages)
 
 class ISTA301Handler(BaseHandler):
     def get(self):

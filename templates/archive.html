@@ -1,6 +1,12 @@
 {%autoescape None%}
 {% extends 'base.html' %}
-{%block title%}Archives{%end%}
+{%block title%}Archives<br/>
+{% if not time %}
+All Time
+{% else %}
+{{ months[int(time[1])-1] + " " + time[0]}}
+{% end %}
+{% end %}
 {%block content%}
 <div class="panel-group">
     {%for page in pagelist%}

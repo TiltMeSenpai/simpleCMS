@@ -7,21 +7,21 @@
 </p>
 <p>
 <h2>Escape: </h2>
-        If you remember, the targeted query looks like:
-        <pre class="prettyprint lang-sql">
-        SELECT name, number FROM phonebook WHERE user LIKE '*input*';
-        </pre> 
-        And every single SQL injection so far has included a single quote character (Could actually be a double quote).
-        Because of this, the simplest way to fix an SQL injection is to remove all quote characters, but you have to do it right.
-        <h3>WRONG</h3>
-        <pre class="prettyprint">
-        SELECT name, number FROM phonebook WHERE user LIKE '+ re.sub(r'\'', r'\\\'', input)
-        </pre>
-        Wait, what? That escapes all of the single quote characters, right? Well, kind of. In reality, if an attacker inputs "\'", our regular expression will escape the single quote, but won't touch the backslash. What we end up with is the string "\\'", or a literal backslash followed by a single quote.  If we were to inject \\' UNION SELECT @@version, we would still get succesful injection. The double backslash would be interpreted as a literal backslash at the server level, and the single quote is escaped. This transforms into:
-        <pre class="prettyprint">
-        SELECT name, number FROM phonebook WHERE user LIKE '\\' UNION @@version;
-        </pre>
-        In order to properly escape our string, we would have to escape all single quotes, all backslashes, and all encoded variants. Unless we use a readily made library and let someone else worry about the encoding, we would have to catch every possibility. However, escaping is fortunately potentially the least efficient technique
+If you remember, the targeted query looks like:
+<pre class="prettyprint lang-sql">
+SELECT name, number FROM phonebook WHERE user LIKE '*input*';
+</pre> 
+And every single SQL injection so far has included a single quote character (Could actually be a double quote).
+Because of this, the simplest way to fix an SQL injection is to remove all quote characters, but you have to do it right.
+<h3>WRONG</h3>
+<pre class="prettyprint">
+SELECT name, number FROM phonebook WHERE user LIKE '+ re.sub(r'\'', r'\\\'', input)
+</pre>
+Wait, what? That escapes all of the single quote characters, right? Well, kind of. In reality, if an attacker inputs "\'", our regular expression will escape the single quote, but won't touch the backslash. What we end up with is the string "\\'", or a literal backslash followed by a single quote.  If we were to inject \\' UNION SELECT @@version, we would still get succesful injection. The double backslash would be interpreted as a literal backslash at the server level, and the single quote is escaped. This transforms into:
+<pre class="prettyprint">
+SELECT name, number FROM phonebook WHERE user LIKE '\\' UNION @@version;
+</pre>
+In order to properly escape our string, we would have to escape all single quotes, all backslashes, and all encoded variants. Unless we use a readily made library and let someone else worry about the encoding, we would have to catch every possibility. However, escaping is fortunately potentially the least efficient technique
 
 <h2>Encode: </h2>
 If you've ever read any article on filter/WAF evasion, you've seen hex sequences used to avoid using single quote characters (Some filters/WAF's will flag them as attempted SQLi). This actually may not be entirely obvious, but we can actually use this to protect ourselves agains SQL injection. In quote-free SQL injection payloads, hex sequences are used in place of string data. Levering this to our advantage, we can hex encode our user inputs to ensure that no malicious input can get through our queries untouched. If we use something like <pre class="prettyprint lang-python inline"> binascii.hexlify(*user input*.encode()) </pre>, we can encode all our user input into hex strings. From here, our query can become
